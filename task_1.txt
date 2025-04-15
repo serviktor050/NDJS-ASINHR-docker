@@ -1,0 +1,87 @@
+Microsoft Windows [Version 10.0.26100.3775]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+D:\Study\NDJS-ASINHR-docker>docker pull busybox:latest
+latest: Pulling from library/busybox
+97e70d161e81: Pull complete
+Digest: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+
+D:\Study\NDJS-ASINHR-docker>docker run -it --name pinger busybox ping -c 7 netology.ru  
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=25.058 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=29.546 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=26.802 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=30.000 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=131.064 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=22.625 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=54.472 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 22.625/45.652/131.064 ms
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a                                               
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                          PORTS     NAMES
+f767321278e8   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) About a minute ago             pinger
+
+D:\Study\NDJS-ASINHR-docker>docker logs pinger
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=25.058 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=29.546 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=26.802 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=30.000 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=131.064 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=22.625 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=54.472 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 22.625/45.652/131.064 ms
+
+D:\Study\NDJS-ASINHR-docker>docker start pinger 
+pinger
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a        
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                     PORTS     NAMES
+f767321278e8   busybox   "ping -c 7 netology.…"   3 minutes ago   Exited (0) 9 seconds ago             pinger
+
+D:\Study\NDJS-ASINHR-docker>docker logs pinger                                         
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=25.058 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=29.546 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=26.802 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=30.000 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=131.064 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=22.625 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=54.472 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 22.625/45.652/131.064 ms
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=26.681 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=25.054 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=23.375 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=136.408 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=24.859 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=39.073 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=24.744 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 23.375/42.884/136.408 ms
+
+D:\Study\NDJS-ASINHR-docker>docker stop pinger 
+pinger
+
+D:\Study\NDJS-ASINHR-docker>docker rm pinger   
+pinger
+
+D:\Study\NDJS-ASINHR-docker>docker rmi busybox                                         
+Untagged: busybox:latest
+Deleted: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+
+D:\Study\NDJS-ASINHR-docker>docker images                                              
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE

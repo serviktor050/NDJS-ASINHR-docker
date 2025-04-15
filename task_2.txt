@@ -1,0 +1,33 @@
+Microsoft Windows [Version 10.0.26100.3775]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+D:\Study\NDJS-ASINHR-docker>docker pull node:20.10
+20.10: Pulling from library/node
+657e9acbc9b4: Pull complete
+4360a670e724: Pull complete
+917ee5330e73: Pull complete
+ffce7831deb3: Pull complete
+b43bd898d5fb: Pull complete
+bc0734b949dc: Pull complete
+9b5852c9e7e7: Pull complete
+b5de22c0f5cd: Pull complete
+Digest: sha256:8d0f16fe841577f9317ab49011c6d819e1fa81f8d4af7ece7ae0ac815e07ac84
+Status: Downloaded newer image for node:20.10
+docker.io/library/node:20.10
+
+D:\Study\NDJS-ASINHR-docker>docker run -it --name mynode -e NAME=sergei -e SURNAME=gagulin node:20.10
+Welcome to Node.js v20.10.0.
+Type ".help" for more information.
+> console.log(`Привет,${process.env.NAME} ${process.env.SURNAME}!`)
+Привет,sergei gagulin!
+undefined
+>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+>
+
+D:\Study\NDJS-ASINHR-docker>docker stop mynode                                                        
+mynode
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a                                                              
+CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS                      PORTS     NAMES
+57205ee340e8   node:20.10   "docker-entrypoint.s…"   4 minutes ago   Exited (0) 23 seconds ago             mynode
