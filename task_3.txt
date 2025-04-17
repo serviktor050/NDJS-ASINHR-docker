@@ -1,1 +1,47 @@
-c
+Microsoft Windows [Version 10.0.26100.3775]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+D:\Study\NDJS-ASINHR-docker>docker run -d --name first_node -v %cd%/data:/var/first/data node:20.10 tail -f /dev/null 
+26e02001c1129e7b03e3e90894bbcee4b42ebbe8c0d9798d318468d912b1f280
+
+D:\Study\NDJS-ASINHR-docker>docker run -d --name second_node -v %cd%/data:/var/second/data node:20.10 tail -f /dev/null
+d39fc26f5069df22ed4fc633843a87afb56272f91a40869b7842a591e95f46bb
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS                    PORTS     NAMES
+d39fc26f5069   node:20.10   "docker-entrypoint.s…"   10 seconds ago   Up 10 seconds                       second_node
+26e02001c112   node:20.10   "docker-entrypoint.s…"   56 seconds ago   Up 56 seconds                       first_node
+57205ee340e8   node:20.10   "docker-entrypoint.s…"   47 hours ago     Exited (0) 47 hours ago             mynode
+
+D:\Study\NDJS-ASINHR-docker>docker exec -it first_node sh -c "echo 'Hello from first_node' > /var/first/data/file_from_first_node.txt"
+
+D:\Study\NDJS-ASINHR-docker>echo Hello from host > data/file_from_host.txt
+
+D:\Study\NDJS-ASINHR-docker>docker exec -it second_node sh -c "ls /var/second/data && cat /var/second/data/*"
+file_from_first_node.txt  file_from_host.txt
+Hello from first_node
+Hello from host
+
+D:\Study\NDJS-ASINHR-docker>docker stop first_node second_node
+first_node
+second_node
+
+D:\Study\NDJS-ASINHR-docker>docker rm first_node second_node
+first_node
+second_node
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a
+CONTAINER ID   IMAGE        COMMAND                  CREATED        STATUS                    PORTS     NAMES
+57205ee340e8   node:20.10   "docker-entrypoint.s…"   47 hours ago   Exited (0) 47 hours ago             mynode
+
+D:\Study\NDJS-ASINHR-docker>docker rm 57205ee340e8    
+57205ee340e8
+
+D:\Study\NDJS-ASINHR-docker>docker rmi node:20.10                     
+Untagged: node:20.10
+Deleted: sha256:8d0f16fe841577f9317ab49011c6d819e1fa81f8d4af7ece7ae0ac815e07ac84
+
+D:\Study\NDJS-ASINHR-docker>docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+D:\Study\NDJS-ASINHR-docker>
